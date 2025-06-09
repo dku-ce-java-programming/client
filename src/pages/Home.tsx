@@ -8,6 +8,8 @@ import { fetchConversations } from "@/utils/api";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://dku-java-3-server.seongmin.dev";
+
 // 예시 질문 데이터
 const SAMPLE_QUESTIONS = [
   "CSUSB의 기숙사는 어때?",
@@ -85,7 +87,7 @@ function Home() {
     e.preventDefault();
     if (question.trim()) {
       try {
-        const response = await fetch("http://localhost:8080/chat", {
+        const response = await fetch(`${API_BASE_URL}/chat`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -127,7 +129,7 @@ function Home() {
 
     // 자동 전송
     try {
-      const response = await fetch("http://localhost:8080/chat", {
+      const response = await fetch(`${API_BASE_URL}/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

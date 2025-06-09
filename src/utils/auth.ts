@@ -1,6 +1,7 @@
 import type { User } from "@/types/auth";
 
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "https://dku-java-3-server.seongmin.dev";
 
 export const authApi = {
   // 현재 사용자 정보 가져오기

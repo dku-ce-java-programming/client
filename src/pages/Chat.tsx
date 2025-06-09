@@ -10,6 +10,8 @@ import {
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "https://dku-java-3-server.seongmin.dev";
+
 type Message = {
   id: string;
   role: "USER" | "ASSISTANT";
@@ -96,7 +98,7 @@ function Chat() {
     async (convId: string): Promise<Message[]> => {
       try {
         const response = await fetch(
-          `http://localhost:8080/chat/${convId}/history`,
+          `${API_BASE_URL}/chat/${convId}/history`,
           {
             credentials: "include",
           }
@@ -151,7 +153,7 @@ function Chat() {
       // 기존 연결이 있다면 정리
       cleanupEventSource();
 
-      const url = `http://localhost:8080/chat/completion?conversationId=${encodeURIComponent(
+      const url = `${API_BASE_URL}/chat/completion?conversationId=${encodeURIComponent(
         conversationId
       )}&content=${encodeURIComponent(messageContent)}`;
 
